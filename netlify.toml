@@ -1,0 +1,10 @@
+[build]
+  publish = "."
+  command = ""
+
+[[redirects]]
+  from = "/"
+  to = "/en/"
+  status = 302
+
+  
