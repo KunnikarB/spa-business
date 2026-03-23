@@ -106,7 +106,7 @@ function showReview() {
   index = (index + 1) % reviews.length;
 }
 
-setInterval(showReview, 3000);
+setInterval(showReview, 60000);
 
 
 
