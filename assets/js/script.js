@@ -105,8 +105,9 @@ function showReview() {
   reviews[index].classList.add("active");
   index = (index + 1) % reviews.length;
 }
+showReview();
 
-setInterval(showReview, 60000);
+setInterval(showReview, 30000);
 
 
 
