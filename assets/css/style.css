@@ -11,11 +11,23 @@
   --white: #ffffff;
   --orange: #FD3D0B;
   --lavender: #E6E6FA;
-  --green-btn: #7A9649;
-  --lemon-green: #808E5D;
+  --green-btn: #8aa678;
+  --lemon-green: #7ab368;
   --light-pink: #ffbdc6;
   --light-brown: #a56a44;
   --beige: #ebb68a; 
+
+  --bg-main: #ffffff;
+  --bg-soft: #f5e6e8;     /* your pink (keep, good choice) */
+  --bg-card: #fffaf5;     /* soft cream (luxury feel) */
+
+  --text-main: #4a3a2c;
+  --text-dark: #2f241b;
+  --text-light: #7a6a5a;
+
+  --accent: #8aa678;      
+  --accent-dark: #6e8c5e;
+  --border-soft: #eee3d6;
 
   /*** typography*/
 
@@ -40,8 +52,8 @@
 
   /*** shadow*/
 
-  --shadow-1: 0 0 20px var(--pink);
-  --shadow-2: 0px 10px 24px var(--lemon-green);
+  --shadow-1: 0 0 20px var(--accent-dark);
+  --shadow-2: 0px 10px 24px var(--text-main);
 
   /**
    * border radius
@@ -194,7 +206,7 @@ body {
 }
 
 .font-green {
-  color: var(--green-btn);
+  color: var(--lemon-green);
 }
 
 .bd-pink {
@@ -277,27 +289,45 @@ body {
 }
 
 .btn-primary {
-  background-color: var(--green-btn);
+  background-color: var(--lemon-green);
   color: var(--white);
   margin: 1rem;
   font-weight: var(--fw-800);
+  border-radius: 50px;
 }
 
 .btn-primary:is(:hover, :focus) {
-  background-color: var(--pink);
+  background-color: var(--accent-dark);
   color: var(--white);
   box-shadow: var(--shadow-1);
+  
 }
 
-.btn-secondary {
-  background-color: var(--black);
+.btn-outline {
+  background: transparent;
+  border: 2px solid var(--accent);
+  color: var(--accent);
+  border-radius: 50px;
+}
+
+.btn-outline:is(:hover, :focus) {
+  background-color: var(--accent-dark);
   color: var(--white);
+  box-shadow: var(--shadow-1);
+  font-weight: var(--fw-700);
 }
 
-.btn-secondary:is(:hover, :focus) {
-  background-color: var(--light-pink);
-  color: var(--pink);
-  box-shadow: var(--shadow-1);
+.btn-soft {
+  background: var(--bg-card);
+  color: #4a3a2c;
+  border: 2px solid var(--accent);
+  border-radius: 50px;
+}
+
+.btn-soft:is(:hover, :focus) {
+  background-color: var(--accent-dark);
+  color: var(--white);
+  box-shadow: var(--shadow-2);
   font-weight: var(--fw-700);
 }
 
@@ -453,8 +483,6 @@ body {
   /* box-shadow: var(--shadow-1); */
   z-index: 4;
   border: none; 
-  background-color: var(--beige); 
-  color: var(--white);
 }
 
 .header > .container {
@@ -503,7 +531,7 @@ body {
 
 
 .nav-open-btn {
-  background-color: var(--green-btn);
+  background-color: var(--lemon-green);
   padding: 20px 15px;
   border-radius: var(--radius-8);
   
@@ -549,7 +577,7 @@ body {
   position: absolute;
   top: 10px;
   right: 15px;
-  background-color: var(--green-btn);
+  background-color: var(--lemon-green);
   color: var(--white);
   font-size: 40px;
   padding: 10px;
@@ -570,7 +598,7 @@ body {
 }
 
 .navbar-list .navbar-link:last-child:hover {
-  background-color: var(--green-btn);
+  background-color: var(--lemon-green);
   color: var(--white);
   border-radius: var(--radius-8);
   transition: all 0.3ms linear;
@@ -579,7 +607,7 @@ body {
 
 .navbar-list .navbar-link:last-child.active {
   color: var(--white);
-  background-color: var(--green-btn);
+  background-color: var(--lemon-green);
   border-radius: var(--radius-8);
 }
 
@@ -613,11 +641,11 @@ body {
 }
 
 .hero-content h1 {
-  color: var(--green-btn);  
+  color: var(--lemon-green);  
 }
 
 .hero-content h2 {
-  color: var(--black);
+  color: var(--text-main);
   font-size: var(--fs-5);
 }
 
@@ -637,7 +665,7 @@ body {
 }
 
 .hero-subtitle {
-  color: var(--green-btn);
+  color: var(--lemon-green);
   margin-inline: auto;
   padding: 5px;
   padding-inline-end: 15px;
@@ -673,13 +701,13 @@ body {
 }
 
 .hero .section-text {
-  color: var(--black);
+  color: var(--text-main);
   font-size: var(--fs-6);
   font-weight: var(--fw-400);
 }
 
 .hero .section-text-about {
-  color: var(--black);
+  color: var(--text-main);
   border: 1px solid var(--pink);
   padding: 15px;
   border-radius: var(--radius-10);
@@ -803,7 +831,7 @@ body {
   margin-block-start: 30px;
 }
 
-.about-coach {
+/* .about-coach {
   display: flex;
   align-items: center;
   gap: 30px;
@@ -826,7 +854,7 @@ body {
 
 .about .coach-title {
   font-size: var(--fs-6);
-}
+} */
 
 .about .btn-primary:is(:hover, :focus) {
   background-color: var(--black);
@@ -1015,13 +1043,13 @@ body {
 }
 
 .blog .container p {
-  color: var(--black);
+  color: var(--text-main);
   margin-bottom: 2rem;
 }
 
 .blog .container .card-content .mt .section-subtitle {
   font-size: var(--fs-5);
-  color: var(--black);
+  color: var(--text-main);
   margin: auto;
 }
 
@@ -1041,8 +1069,16 @@ body {
 /*-----------------------------------*\
   #REVIEWS
 \*-----------------------------------*/
+#reviews {
+  padding: 80px 20px;
+  background: linear-gradient(
+    to bottom,
+    #f5e6e8,
+    #f9f1f2
+  );
+}
+
 .reviews-container {
-  background-color: var(--pink);
   max-width: 1200px;
   margin: auto;
   padding: 2.5rem;
@@ -1054,6 +1090,12 @@ body {
   align-items: center;
   justify-items: center;
   gap: 2rem;
+}
+
+.reviews-container h2 {
+  font-size: 26px;
+  color: var(--text-dark);
+  letter-spacing: 0.5px;
 }
 
 .slider {
@@ -1073,16 +1115,29 @@ body {
 .review {
   min-width: 100%;
   box-sizing: border-box;
-  background: var(--light-brown);
-  padding: 25px;
+  background: var(--bg-card);
+  color: var(--text-main);
+  padding: 24px;
   margin: 0;
-  border-radius: 12px;
-  box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+  border: 1px solid var(--border-soft);
 }
 
 .review.active {
   opacity: 1;
   position: relative;
+}
+
+.review p {
+  line-height: 1.7;
+  font-size: 15px;
+}
+
+.review h4 {
+  margin-top: 15px;
+  font-weight: 600;
+  color: var(--text-dark);
 }
 
 .stars {
@@ -1091,12 +1146,22 @@ body {
   margin-bottom: 10px;
 }
 
-#reviews .btn {
+/* #reviews .btn {
   display: inline-block;
-  background-color: var(--green-btn);
-  color: var(--white);
-  font-weight: var(--fw-800);
-}
+  background: var(--accent);
+  color: #fff;
+  border-radius: 50px;
+  padding: 12px 24px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
+} */
+
+/* #reviews .btn:hover  {
+  background: var(--accent-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+} */
 
 /* Dots Indicator (Pagination) */
 .dots {
@@ -1107,17 +1172,17 @@ body {
 }
 
 .dot {
-  width: 10px;
-  height: 10px;
-  background: var(--white);
+  width: 8px;
+  height: 8px;
+  background: #ddd;
   border-radius: 50%;
-  cursor: pointer;
   transition: all 0.3s ease;
 }
 
 .dot.active {
-  background: var(--green-btn);
-  transform: scale(1.2);
+  width: 18px;
+  border-radius: 10px;
+  background: var(--accent);
 }
 
 .dot:hover {
@@ -1133,7 +1198,7 @@ body {
   margin-top: 20px;
 }
 
-.review-btn {
+/* .review-btn {
   padding: 10px 18px;
   border-radius: 8px;
   font-weight: 600;
@@ -1148,15 +1213,31 @@ body {
 
 .review-btn:hover {
   opacity: 0.9;
+} */
+
+.review-link {
+  display: inline-block;
+  margin-top: 10px;
+  color: #8aa678;
+  font-size: 14px;
+  text-decoration: underline;
 }
 
 /* Start rating */
-.google-rating {
-  display: flex;
+/* 
+ */
+
+ .google-rating {
+  background: #ffffff;
+  color: var(--text-main);
+  border-radius: 50px;
+  padding: 8px 16px;
+  display: inline-flex;
   align-items: center;
-  justify-content: center;
-  gap: 1rem;
+  gap: 8px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.05);
 }
+
 .google-rating img {
   max-width: 50px;
 }
@@ -1244,7 +1325,7 @@ body {
   bottom: 0;
   width: 70px;
   height: 1px;
-  background-color: var(--green-btn);
+  background-color: var(--lemon-green);
 }
 
 .footer-list > li:not(:first-child) {
@@ -1256,7 +1337,7 @@ body {
 }
 
 .footer-link:is(:hover, :focus) {
-  color: var(--pink);
+  color: var(--light-pink);
   box-shadow: var(--shadow-1);
   cursor: pointer;
 }
@@ -1269,7 +1350,7 @@ body {
 }
 
 .footer-list-item .icon {
-  background-color: var(--green-btn);
+  background-color: var(--lemon-green);
   color: var(--white);
   font-size: 24px;
   padding: 8px;
@@ -1277,8 +1358,8 @@ body {
 }
 
 .footer-list-item .icon:hover {
-  background-color: var(--black);
-  color: var(--pink);
+  background-color: var(--accent-dark);
+  color: var(--white);
   box-shadow: var(--shadow-1);
   cursor: pointer;
 }
@@ -1290,7 +1371,7 @@ body {
 }
 
 .social-link {
-  background-color: var(--green-btn);
+  background-color: var(--lemon-green);
   color: var(--white);
   padding: 8px;
   border-radius: 50%;
@@ -1300,8 +1381,7 @@ body {
 
 .social-link:is(:hover, :focus) {
   box-shadow: var(--shadow-1);
-  background-color: var(--black);
-  color: var(--pink);
+  color: var(--light-pink);
   cursor: pointer;
 }
 
