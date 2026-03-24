@@ -18,11 +18,11 @@
   --beige: #ebb68a; 
 
   --bg-main: #ffffff;
-  --bg-soft: #f5e6e8;     /* your pink (keep, good choice) */
+  --bg-soft: #e4b5a7;     /* your pink (keep, good choice) */
   --bg-card: #fffaf5;     /* soft cream (luxury feel) */
 
-  --text-main: #4a3a2c;
-  --text-dark: #2f241b;
+  --text-main: #c38c67;
+  --text-dark: #915E46;
   --text-light: #7a6a5a;
 
   --accent: #8aa678;      
@@ -286,6 +286,7 @@ body {
   padding: 15px 35px;
   border-radius: var(--radius-8);
   transition: var(--transition-1);
+  border-radius: 50px;
 }
 
 .btn-primary {
@@ -329,6 +330,7 @@ body {
   color: var(--white);
   box-shadow: var(--shadow-2);
   font-weight: var(--fw-700);
+  
 }
 
 .w-100 {
@@ -403,6 +405,7 @@ body {
   text-transform: uppercase;
   max-width: max-content;
   transition: var(--transition-1);
+  border-radius: 50px;
 }
 
 .btn-link::before {
@@ -464,6 +467,10 @@ body {
 
 .has-scrollbar::-webkit-scrollbar-button {
   width: calc(25% - 25px);
+}
+
+.text-w {
+  color: var(--white)
 }
 
 /*-----------------------------------*\
@@ -720,6 +727,7 @@ body {
   margin: 0 auto;
   margin-top: 4rem;
   margin-bottom: 4rem;
+  border-radius: 50px;
 }
 
 .abs-img-1 {
@@ -831,31 +839,6 @@ body {
   margin-block-start: 30px;
 }
 
-/* .about-coach {
-  display: flex;
-  align-items: center;
-  gap: 30px;
-  margin-block-end: 30px;
-  
-}
-
-.about .coach-avatar {
-  overflow: hidden;
-  border-radius:50%;
-  width: 100px;
-}
-
-.about .coach-name {
-  font-weight: var(--fw-700);
-  margin-block-end: 1px;
-  color: var(--pink);
-  font-size: var(--fs-4);
-}
-
-.about .coach-title {
-  font-size: var(--fs-6);
-} */
-
 .about .btn-primary:is(:hover, :focus) {
   background-color: var(--black);
   color: var(--white);
@@ -887,7 +870,7 @@ body {
   padding-block-start: calc(var(--section-padding));
 
   & .h2 {
-    color: var(--black);
+    color: var(--text-main);
     font-size: var(--fs-3);
   }
 
@@ -982,6 +965,10 @@ body {
   font-size: var(--fs-5);
 }
 
+.card-content .card-progress .hero-content a {
+  margin-top: 2rem;
+}
+
 .class-card .title-wrapper {
   display: flex;
   align-items: center;
@@ -1003,14 +990,18 @@ body {
 }
 
 .class-card .card-text {
-  color: var(--black);
+  color: var(--text-main);
   font-size: var(--fs-5);
-  font-weight: var(--fw-500);
+  font-weight: var(--fw-400);
   margin-block: 16px 12px; 
 
   & strong {
     color: var(--pink);
   }
+}
+
+.card-progress .hero-content a {
+  border-radius: 50px;
 }
 
 .swipe {
@@ -1026,11 +1017,15 @@ body {
 }
 
  .swipe-icon {
-  background-color: var(--green-btn);
+  background-color: var(--lemon-green);
   border-radius: 50%;
   padding: 4px;
   width: 50px;
   height: 50px; 
+}
+
+.swipe .card-text {
+  border-radius: 50px;
 }
 
 /*-----------------------------------*\
@@ -1063,7 +1058,7 @@ body {
 
 .blog .container .section-title {
   font-size: var(--fs-3);
-  color: var(--green-btn);
+  color: var(--text-dark);
 }
 
 /*-----------------------------------*\
@@ -1100,7 +1095,7 @@ body {
 
 .slider {
   overflow: hidden;
-  max-width: 800px;
+  max-width: 1000px;
   margin: auto;
   position: relative;
   touch-action: pan-y;
@@ -1140,28 +1135,22 @@ body {
   color: var(--text-dark);
 }
 
+.review-translation {
+  font-size: 15px;
+  background-color: var(--text-dark);
+  color: var(--white);
+  font-style: italic;
+  border-radius: 8px;
+  margin: 15px;
+  padding: 24px;
+  line-height: 1.7;
+}
+
 .stars {
   color: gold;
   font-size: 20px;
   margin-bottom: 10px;
 }
-
-/* #reviews .btn {
-  display: inline-block;
-  background: var(--accent);
-  color: #fff;
-  border-radius: 50px;
-  padding: 12px 24px;
-  font-weight: 600;
-  letter-spacing: 0.5px;
-  transition: all 0.3s ease;
-} */
-
-/* #reviews .btn:hover  {
-  background: var(--accent-dark);
-  transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-} */
 
 /* Dots Indicator (Pagination) */
 .dots {
@@ -1196,40 +1185,30 @@ body {
   gap: 12px;
   flex-wrap: wrap;
   margin-top: 20px;
+  margin-bottom: 0;
 }
 
-/* .review-btn {
-  padding: 10px 18px;
-  border-radius: 8px;
-  font-weight: 600;
-  text-decoration: none;
+.review-actions a {
+  border-radius: 50px;
 }
-
-.review-btn.outline {
-  background: transparent;
-  border: 2px solid var(--green-btn);
-  color: var(--green-btn);
-}
-
-.review-btn:hover {
-  opacity: 0.9;
-} */
 
 .review-link {
   display: inline-block;
   margin-top: 10px;
   color: #8aa678;
   font-size: 14px;
-  text-decoration: underline;
+  text-decoration: none;
+}
+
+.review-link:hover {
+  color: var(--text-main);
 }
 
 /* Start rating */
-/* 
- */
 
  .google-rating {
   background: #ffffff;
-  color: var(--text-main);
+  color: var(--text-dark);
   border-radius: 50px;
   padding: 8px 16px;
   display: inline-flex;
@@ -1412,7 +1391,7 @@ body {
   position: fixed;
   bottom: 20px;
   right: 40px;
-  background-color: var(--green-btn);
+  background-color: var(--lemon-green);
   font-size: 1px;
   padding: 4px;
   border-radius: 50%;
