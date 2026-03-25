@@ -1626,6 +1626,10 @@ body {
   max-width: 90%;
 }
 
+.reviews-container h2 {
+  font-size: 22px;
+}
+
 .review h4 {
   margin-top: 0.5rem;
   font-size: 14px;
@@ -1640,9 +1644,16 @@ body {
 }
 
 .google-rating {
-  flex-direction: column;
-  gap: 4px;
-  text-align: center;
+  font-size: 14px;
+  padding: 6px 12px;
+}
+
+.google-rating img {
+  max-width: 40px;
+}
+
+.google-rating .star-rating {
+  font-size: 16px;
 }
 
 .review-actions {
