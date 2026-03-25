@@ -1260,28 +1260,41 @@ body {
 
 .footer-top .container {
   display: grid;
-  gap: 50px;
-}
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  margin-left: 1rem;
+} 
 
 .footer .logo ion-icon {
-  color: var(--green-btn);
+  color: var(--lemon-green);
 }
 
-.container .footer-brand a {
-  margin-bottom: 2rem;
+.footer .logo img {
+  width: 35px;
 }
 
+.footer-brand .logo span {
+  color: var(--white);
+  margin-left: 0;
+  font-size: var(--fs-4);
+  font-weight: var(--fw-800);
+  margin-block-end: 28px;
+} 
+
+.footer-top .logo {
+  align-items: flex-start;
+}
 
 .footer-top .wrapper {
   display: flex;
+  align-items: center;
   justify-content: flex-start;
-  align-items: flex-start;
-  gap: 20px;
-  margin-left: 2.5rem;
+  gap: 15px;
+  margin-left: 0;
 }
 
 .footer-top .wrapper img {
-  border-radius: 50%;  
+  border-radius: 50%; 
 }
 
 .footer-brand-list li:not(:last-child) {
@@ -1331,7 +1344,7 @@ body {
 .footer-list-item .icon {
   background-color: var(--lemon-green);
   color: var(--white);
-  font-size: 24px;
+  font-size: 20px;
   padding: 8px;
   border-radius: 50px;
 }
@@ -1346,7 +1359,7 @@ body {
 .social-list {
   display: flex;
   gap: 15px;
-  font-size: 24px;
+  font-size: 20px;
 }
 
 .social-link {
@@ -1355,7 +1368,7 @@ body {
   padding: 8px;
   border-radius: 50%;
   transition: var(--transition-1);
-  font-size: 24px;
+  font-size: 20px;
 }
 
 .social-link:is(:hover, :focus) {
@@ -1364,23 +1377,25 @@ body {
   cursor: pointer;
 }
 
+
 .footer-bottom {
   color: var(--white);
   text-align: center;
   padding-block: 15px;
+}
 
-  & .copyright {
+.footer-bottom .copyright {
   display: flex;
   align-items: center;
   justify-content: center;
-
-  & span {
-    margin-inline: 5px;
-  }
 }
+
+.footer-bottom .copyright span {
+  margin-inline: 5px;
+}
+
 .nowrap {
   white-space: nowrap;
-}
 }
 
 /*-----------------------------------*\
@@ -1401,7 +1416,7 @@ body {
   z-index: 4;
 
   & ion-icon {
-    font-size: 35px;
+    font-size: 25px;
     color: var(--white);
   }
 }
@@ -1764,14 +1779,6 @@ body {
   .video-card .card-title {
     --fs-3: 3.5rem;
   }
-  
-
-  /*** FOOTER */
-
-  .footer-top .container {
-    grid-template-columns: 1fr 1fr;
-    column-gap: 25px;
-  }
 
   .review {
     padding: 20px;
@@ -1858,6 +1865,21 @@ body {
 
   .review-actions .btn {
     width: auto;
+  }
+
+  /* Footer */
+  .footer {
+    text-align: left;
+  }
+
+  .footer-top .wrapper,
+  .footer-list-item,
+  .social-list {
+    justify-content: flex-start;
+  }
+
+  .footer-top .container {
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
@@ -2073,6 +2095,12 @@ body {
 /**
  * responsive for larger than 1200px screen
  */
+
+@media (min-width: 1024px) {
+  .footer-top .container {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
 
 @media (min-width: 1200px) {
   /*** CUSTOM PROPERTY */
