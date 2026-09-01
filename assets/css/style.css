@@ -1065,9 +1065,9 @@ body {
   #REVIEWS
 \*-----------------------------------*/
 #reviews {
-  padding: 80px 20px;
+  padding: 30px 0;
   background: linear-gradient(
-    to left,
+    to top,
     #f5e6e8,
     #BB8E6D
   );
@@ -1076,7 +1076,7 @@ body {
 .reviews-container {
   max-width: 1200px;
   margin: auto;
-  padding: 2.5rem;
+  padding: 1rem;
   border-radius: 8px;
   overflow: hidden;
   position: relative;
@@ -1089,7 +1089,10 @@ body {
 
 .reviews-container h2 {
   font-size: 26px;
-  color: #7ab368;
+  color: var(--lemon-green);
+  background-color: var(--bg-card);
+  padding: 10px 20px;
+  border-radius: 8px;
   letter-spacing: 0.5px;
 }
 
@@ -1126,7 +1129,7 @@ body {
 
 .review p {
   line-height: 1.7;
-  font-size: 15px;
+  font-size: 16px;
 }
 
 .review h4 {
@@ -1136,7 +1139,7 @@ body {
 }
 
 .review-translation {
-  font-size: 15px;
+  font-size: 16px;
   background-color: var(--text-dark);
   color: var(--white);
   font-style: italic;
@@ -1195,8 +1198,8 @@ body {
 .review-link {
   display: inline-block;
   margin-top: 10px;
-  color: #8aa678;
-  font-size: 14px;
+  color: var(--lemon-green);
+  font-size: 16px;
   text-decoration: none;
 }
 
