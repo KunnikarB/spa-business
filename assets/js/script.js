@@ -1,5 +1,11 @@
+'use strict';
 
+/**
+ * Helper: add event listener to one or multiple elements
+ */
 const addEventOnElem = function (elem, type, callback) {
+  if (!elem) return;
+
   if (elem.length > 1) {
     for (let i = 0; i < elem.length; i++) {
       elem[i].addEventListener(type, callback);
@@ -10,7 +16,7 @@ const addEventOnElem = function (elem, type, callback) {
 };
 
 /**
- * navbar toggle
+ * NAVBAR TOGGLE
  */
 
 const navbar = document.querySelector('[data-navbar]');
@@ -18,19 +24,23 @@ const navTogglers = document.querySelectorAll('[data-nav-toggler]');
 const navLinks = document.querySelectorAll('[data-nav-link]');
 
 const toggleNavbar = function () {
-  navbar.classList.toggle('active');
+  if (navbar) {
+    navbar.classList.toggle('active');
+  }
 };
 
 addEventOnElem(navTogglers, 'click', toggleNavbar);
 
 const closeNavbar = function () {
-  navbar.classList.remove('active');
+  if (navbar) {
+    navbar.classList.remove('active');
+  }
 };
 
 addEventOnElem(navLinks, 'click', closeNavbar);
 
 /**
- * header & back top btn active
+ * HEADER & BACK TO TOP BUTTON
  */
 
 const header = document.querySelector('[data-header]');
@@ -38,175 +48,422 @@ const backTopBtn = document.querySelector('[data-back-top-btn]');
 
 window.addEventListener('scroll', function () {
   if (window.scrollY >= 100) {
-    header.classList.add('active');
-    backTopBtn.classList.add('active');
+    if (header) {
+      header.classList.add('active');
+    }
+
+    if (backTopBtn) {
+      backTopBtn.classList.add('active');
+    }
   } else {
-    header.classList.remove('active');
-    backTopBtn.classList.remove('active');
+    if (header) {
+      header.classList.remove('active');
+    }
+
+    if (backTopBtn) {
+      backTopBtn.classList.remove('active');
+    }
   }
 });
 
+/**
+ * CURRENT YEAR
+ */
+
 const year = document.getElementById('year');
-const thisYear = new Date().getFullYear();
-year.setAttribute('datetime', thisYear);
-year.textContent = thisYear;
 
+if (year) {
+  const thisYear = new Date().getFullYear();
 
-// Switch En/Sv
+  year.setAttribute('datetime', thisYear);
+  year.textContent = thisYear;
+}
 
-  document.addEventListener('DOMContentLoaded', function () {
-    const langEnLink = document.getElementById('lang-en');
-    const langSvLink = document.getElementById('lang-sv');
+/**
+ * ENGLISH / SWEDISH LANGUAGE SWITCHER
+ *
+ * English:
+ * /                  = homepage
+ * /en/about.html    = About
+ * /en/contact.html  = Contact
+ * /en/treatments.html = Treatments
+ *
+ * Swedish:
+ * /sv/               = homepage
+ * /sv/om-oss.html    = About
+ * /sv/kontakt.html   = Contact
+ * /sv/behandlingar.html = Treatments
+ */
 
-    const pageMap = {
-      'index.html': 'index.html',
-      'about.html': 'om-oss.html',
-      'contact.html': 'kontakt.html',
-      'treatments.html': 'behandlingar.html',
-      'fitness.html': 'fitness.html',
-      'wellness.html': 'valbefinnande.html'
-    };
+document.addEventListener('DOMContentLoaded', function () {
+  const langEnLink = document.getElementById('lang-en');
+  const langSvLink = document.getElementById('lang-sv');
 
-    const currentPath = window.location.pathname;
-    const pathParts = currentPath.split('/');
-    const currentLang = pathParts[1];
-    const currentPage = pathParts[2] || 'index.html';
+  /**
+   * Page names shared between English and Swedish
+   */
+  const pageMap = {
+    index: {
+      en: '/',
+      sv: '/sv/',
+    },
 
-    function getTranslatedPage(targetLang) {
-      if (targetLang === 'en') {
-        const enPage = Object.keys(pageMap).find(
-          (key) => pageMap[key] === currentPage
-        );
-        return `/${targetLang}/${enPage || 'index.html'}`;
-      } else {
-        const svPage = pageMap[currentPage] || 'index.html';
-        return `/${targetLang}/${svPage}`;
-      }
+    about: {
+      en: '/en/about.html',
+      sv: '/sv/om-oss.html',
+    },
+
+    contact: {
+      en: '/en/contact.html',
+      sv: '/sv/kontakt.html',
+    },
+
+    treatments: {
+      en: '/en/treatments.html',
+      sv: '/sv/behandlingar.html',
+    },
+
+    fitness: {
+      en: '/en/fitness.html',
+      sv: '/sv/fitness.html',
+    },
+
+    wellness: {
+      en: '/en/wellness.html',
+      sv: '/sv/valbefinnande.html',
+    },
+  };
+
+  /**
+   * Convert current URL into a simple page key.
+   *
+   * Examples:
+   *
+   * /
+   * /en/
+   * /en/index.html
+   * /sv/
+   * /sv/index.html
+   *
+   * all become:
+   * index
+   *
+   * /en/about.html
+   * /en/about
+   * become:
+   * about
+   *
+   * /sv/om-oss.html
+   * /sv/om-oss
+   * become:
+   * about
+   */
+
+  function getCurrentPageKey() {
+    let path = window.location.pathname;
+
+    // Remove trailing slash
+    path = path.replace(/\/$/, '');
+
+    // Homepage
+    if (
+      path === '' ||
+      path === '/' ||
+      path === '/en' ||
+      path === '/en/index.html' ||
+      path === '/sv' ||
+      path === '/sv/index.html'
+    ) {
+      return 'index';
     }
 
-    langEnLink?.addEventListener('click', function (e) {
+    // Remove language folder
+    path = path.replace(/^\/en\//, '');
+    path = path.replace(/^\/sv\//, '');
+
+    // Remove .html
+    path = path.replace(/\.html$/, '');
+
+    /**
+     * Swedish → English page names
+     */
+    const swedishToEnglish = {
+      'om-oss': 'about',
+      kontakt: 'contact',
+      behandlingar: 'treatments',
+      fitness: 'fitness',
+      valbefinnande: 'wellness',
+    };
+
+    if (swedishToEnglish[path]) {
+      return swedishToEnglish[path];
+    }
+
+    /**
+     * English page names
+     */
+    const englishPages = [
+      'about',
+      'contact',
+      'treatments',
+      'fitness',
+      'wellness',
+    ];
+
+    if (englishPages.includes(path)) {
+      return path;
+    }
+
+    // If page cannot be identified, use homepage
+    return 'index';
+  }
+
+  /**
+   * Get translated URL
+   */
+  function getTranslatedPage(targetLanguage) {
+    const currentPageKey = getCurrentPageKey();
+
+    if (pageMap[currentPageKey] && pageMap[currentPageKey][targetLanguage]) {
+      return pageMap[currentPageKey][targetLanguage];
+    }
+
+    // Safe fallback
+    return targetLanguage === 'sv' ? '/sv/' : '/';
+  }
+
+  /**
+   * Set correct href values
+   *
+   * This means the links work even before someone clicks them.
+   */
+  if (langEnLink) {
+    langEnLink.href = getTranslatedPage('en');
+  }
+
+  if (langSvLink) {
+    langSvLink.href = getTranslatedPage('sv');
+  }
+
+  /**
+   * English button
+   */
+  if (langEnLink) {
+    langEnLink.addEventListener('click', function (e) {
       e.preventDefault();
+
       window.location.href = getTranslatedPage('en');
     });
+  }
 
-    langSvLink?.addEventListener('click', function (e) {
+  /**
+   * Swedish button
+   */
+  if (langSvLink) {
+    langSvLink.addEventListener('click', function (e) {
       e.preventDefault();
+
       window.location.href = getTranslatedPage('sv');
     });
-  });
+  }
+});
 
-  // Reviews
+/**
+ * REVIEWS SLIDER
+ */
 
-const track = document.querySelector(".slider-track");
-const slides = document.querySelectorAll(".review");
-const dotsContainer = document.querySelector(".dots");
+const track = document.querySelector('.slider-track');
+const slides = document.querySelectorAll('.review');
+const dotsContainer = document.querySelector('.dots');
+
 let dots = [];
-
 let index = 0;
 let startX = 0;
 let currentX = 0;
 let isDragging = false;
 let interval;
 
-// Move slider
-function updateSlide() {
-  track.style.transform = `translateX(-${index * 100}%)`;
-  updateDots();
-}
+/**
+ * Stop if this page does not contain the review slider
+ */
+if (track && slides.length > 0 && dotsContainer) {
+  /**
+   * Move slider
+   */
+  function updateSlide() {
+    track.style.transform = `translateX(-${index * 100}%)`;
 
-// Next / Prev
-function nextSlide() {
-  index = (index + 1) % slides.length;
-  updateSlide();
-}
+    updateDots();
+  }
 
-function prevSlide() {
-  index = (index - 1 + slides.length) % slides.length;
-  updateSlide();
-}
+  /**
+   * Next slide
+   */
+  function nextSlide() {
+    index = (index + 1) % slides.length;
 
-// Auto
-function startAuto() {
-  interval = setInterval(nextSlide, 30000); // faster feels better for slider
-}
+    updateSlide();
+  }
 
-function stopAuto() {
-  clearInterval(interval);
-}
+  /**
+   * Previous slide
+   */
+  function prevSlide() {
+    index = (index - 1 + slides.length) % slides.length;
 
-// Drag start
-function startDrag(x) {
-  isDragging = true;
-  startX = x;
-  stopAuto();
-  track.style.transition = "none";
-}
+    updateSlide();
+  }
 
-// Drag move (REAL movement 🔥)
-function moveDrag(x) {
-  if (!isDragging) return;
+  /**
+   * Auto slider
+   */
+  function startAuto() {
+    stopAuto();
 
-  currentX = x;
-  let diff = currentX - startX;
+    interval = setInterval(nextSlide, 30000);
+  }
 
-  track.style.transform = `translateX(calc(-${index * 100}% + ${diff}px))`;
-}
+  /**
+   * Stop auto slider
+   */
+  function stopAuto() {
+    if (interval) {
+      clearInterval(interval);
+    }
+  }
 
-// Drag end (snap)
-function endDrag() {
-  if (!isDragging) return;
-  isDragging = false;
+  /**
+   * Drag start
+   */
+  function startDrag(x) {
+    isDragging = true;
 
-  let diff = currentX - startX;
+    startX = x;
+    currentX = x;
 
-  if (diff < -50) nextSlide();
-  else if (diff > 50) prevSlide();
+    stopAuto();
 
-  track.style.transition = "transform 0.4s ease";
-  updateSlide();
-  startAuto();
-}
+    track.style.transition = 'none';
+  }
 
-// Events
-const slider = document.querySelector(".slider");
+  /**
+   * Drag move
+   */
+  function moveDrag(x) {
+    if (!isDragging) return;
 
-slider.addEventListener("touchstart", e => startDrag(e.touches[0].clientX));
-slider.addEventListener("touchmove", e => moveDrag(e.touches[0].clientX));
-slider.addEventListener("touchend", endDrag);
+    currentX = x;
 
-slider.addEventListener("mousedown", e => startDrag(e.clientX));
-slider.addEventListener("mousemove", e => moveDrag(e.clientX));
-slider.addEventListener("mouseup", endDrag);
-slider.addEventListener("mouseleave", endDrag);
+    const diff = currentX - startX;
 
-// Dots dynamically
-function createDots() {
-  slides.forEach((_, i) => {
-    const dot = document.createElement("div");
-    dot.classList.add("dot");
+    track.style.transform = `translateX(calc(-${index * 100}% + ${diff}px))`;
+  }
 
-    dot.addEventListener("click", () => {
-      index = i;
+  /**
+   * Drag end
+   */
+  function endDrag() {
+    if (!isDragging) return;
+
+    isDragging = false;
+
+    const diff = currentX - startX;
+
+    track.style.transition = 'transform 0.4s ease';
+
+    if (diff < -50) {
+      nextSlide();
+    } else if (diff > 50) {
+      prevSlide();
+    } else {
       updateSlide();
-      updateDots();
-      stopAuto();
-      startAuto();
+    }
+
+    startAuto();
+  }
+
+  /**
+   * Touch events
+   */
+  track.addEventListener(
+    'touchstart',
+    function (e) {
+      startDrag(e.touches[0].clientX);
+    },
+    { passive: true },
+  );
+
+  track.addEventListener(
+    'touchmove',
+    function (e) {
+      moveDrag(e.touches[0].clientX);
+    },
+    { passive: true },
+  );
+
+  track.addEventListener('touchend', endDrag);
+
+  /**
+   * Mouse events
+   */
+  track.addEventListener('mousedown', function (e) {
+    startDrag(e.clientX);
+  });
+
+  track.addEventListener('mousemove', function (e) {
+    moveDrag(e.clientX);
+  });
+
+  track.addEventListener('mouseup', endDrag);
+
+  track.addEventListener('mouseleave', endDrag);
+
+  /**
+   * Create dots
+   */
+  function createDots() {
+    slides.forEach(function (_, i) {
+      const dot = document.createElement('div');
+
+      dot.classList.add('dot');
+
+      dot.addEventListener('click', function () {
+        index = i;
+
+        updateSlide();
+
+        stopAuto();
+
+        startAuto();
+      });
+
+      dotsContainer.appendChild(dot);
+
+      dots.push(dot);
+    });
+  }
+
+  /**
+   * Update active dot
+   */
+  function updateDots() {
+    dots.forEach(function (dot) {
+      dot.classList.remove('active');
     });
 
-    dotsContainer.appendChild(dot);
-    dots.push(dot);
+    if (dots[index]) {
+      dots[index].classList.add('active');
+    }
+  }
+
+  /**
+   * Initialize slider
+   */
+  document.addEventListener('DOMContentLoaded', function () {
+    createDots();
+
+    updateSlide();
+
+    startAuto();
   });
 }
-
-// Update active dot
-function updateDots() {
-  dots.forEach(d => d.classList.remove("active"));
-  dots[index].classList.add("active");
-}
-
-// Init
-document.addEventListener("DOMContentLoaded", () => {
-  createDots();
-  updateSlide();
-  startAuto();
-});
