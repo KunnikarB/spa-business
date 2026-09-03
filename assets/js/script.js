@@ -18,7 +18,6 @@ const addEventOnElem = function (elem, type, callback) {
 /**
  * NAVBAR TOGGLE
  */
-
 const navbar = document.querySelector('[data-navbar]');
 const navTogglers = document.querySelectorAll('[data-nav-toggler]');
 const navLinks = document.querySelectorAll('[data-nav-link]');
@@ -42,7 +41,6 @@ addEventOnElem(navLinks, 'click', closeNavbar);
 /**
  * HEADER & BACK TO TOP BUTTON
  */
-
 const header = document.querySelector('[data-header]');
 const backTopBtn = document.querySelector('[data-back-top-btn]');
 
@@ -69,12 +67,10 @@ window.addEventListener('scroll', function () {
 /**
  * CURRENT YEAR
  */
-
 const year = document.getElementById('year');
 
 if (year) {
   const thisYear = new Date().getFullYear();
-
   year.setAttribute('datetime', thisYear);
   year.textContent = thisYear;
 }
@@ -84,17 +80,20 @@ if (year) {
  *
  * English:
  * /                  = homepage
- * /en/about.html    = About
- * /en/contact.html  = Contact
- * /en/treatments.html = Treatments
+ * /en/about         = About
+ * /en/contact       = Contact
+ * /en/treatments    = Treatments
+ * /en/fitness        = F.I.T
+ * /en/wellness       = Wellness
  *
  * Swedish:
- * /sv/               = homepage
- * /sv/om-oss.html    = About
- * /sv/kontakt.html   = Contact
- * /sv/behandlingar.html = Treatments
+ * /sv/              = homepage
+ * /sv/om-oss        = About
+ * /sv/kontakt       = Contact
+ * /sv/behandlingar  = Treatments
+ * /sv/fitness        = F.I.T
+ * /sv/valbefinnande  = Wellness
  */
-
 document.addEventListener('DOMContentLoaded', function () {
   const langEnLink = document.getElementById('lang-en');
   const langSvLink = document.getElementById('lang-sv');
@@ -109,28 +108,28 @@ document.addEventListener('DOMContentLoaded', function () {
     },
 
     about: {
-      en: '/en/about.html',
-      sv: '/sv/om-oss.html',
+      en: '/en/about',
+      sv: '/sv/om-oss',
     },
 
     contact: {
-      en: '/en/contact.html',
-      sv: '/sv/kontakt.html',
+      en: '/en/contact',
+      sv: '/sv/kontakt',
     },
 
     treatments: {
-      en: '/en/treatments.html',
-      sv: '/sv/behandlingar.html',
+      en: '/en/treatments',
+      sv: '/sv/behandlingar',
     },
 
     fitness: {
-      en: '/en/fitness.html',
-      sv: '/sv/fitness.html',
+      en: '/en/fitness',
+      sv: '/sv/fitness',
     },
 
     wellness: {
-      en: '/en/wellness.html',
-      sv: '/sv/valbefinnande.html',
+      en: '/en/wellness',
+      sv: '/sv/valbefinnande',
     },
   };
 
@@ -148,17 +147,16 @@ document.addEventListener('DOMContentLoaded', function () {
    * all become:
    * index
    *
-   * /en/about.html
    * /en/about
+   * /en/about.html
    * become:
    * about
    *
-   * /sv/om-oss.html
    * /sv/om-oss
+   * /sv/om-oss.html
    * become:
    * about
    */
-
   function getCurrentPageKey() {
     let path = window.location.pathname;
 
@@ -181,7 +179,7 @@ document.addEventListener('DOMContentLoaded', function () {
     path = path.replace(/^\/en\//, '');
     path = path.replace(/^\/sv\//, '');
 
-    // Remove .html
+    // Remove .html if someone visits the old URL
     path = path.replace(/\.html$/, '');
 
     /**
@@ -234,8 +232,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
   /**
    * Set correct href values
-   *
-   * This means the links work even before someone clicks them.
    */
   if (langEnLink) {
     langEnLink.href = getTranslatedPage('en');
@@ -251,7 +247,6 @@ document.addEventListener('DOMContentLoaded', function () {
   if (langEnLink) {
     langEnLink.addEventListener('click', function (e) {
       e.preventDefault();
-
       window.location.href = getTranslatedPage('en');
     });
   }
@@ -262,7 +257,6 @@ document.addEventListener('DOMContentLoaded', function () {
   if (langSvLink) {
     langSvLink.addEventListener('click', function (e) {
       e.preventDefault();
-
       window.location.href = getTranslatedPage('sv');
     });
   }
@@ -271,7 +265,6 @@ document.addEventListener('DOMContentLoaded', function () {
 /**
  * REVIEWS SLIDER
  */
-
 const track = document.querySelector('.slider-track');
 const slides = document.querySelectorAll('.review');
 const dotsContainer = document.querySelector('.dots');
@@ -292,7 +285,6 @@ if (track && slides.length > 0 && dotsContainer) {
    */
   function updateSlide() {
     track.style.transform = `translateX(-${index * 100}%)`;
-
     updateDots();
   }
 
@@ -301,7 +293,6 @@ if (track && slides.length > 0 && dotsContainer) {
    */
   function nextSlide() {
     index = (index + 1) % slides.length;
-
     updateSlide();
   }
 
@@ -310,7 +301,6 @@ if (track && slides.length > 0 && dotsContainer) {
    */
   function prevSlide() {
     index = (index - 1 + slides.length) % slides.length;
-
     updateSlide();
   }
 
@@ -319,7 +309,6 @@ if (track && slides.length > 0 && dotsContainer) {
    */
   function startAuto() {
     stopAuto();
-
     interval = setInterval(nextSlide, 30000);
   }
 
@@ -337,12 +326,9 @@ if (track && slides.length > 0 && dotsContainer) {
    */
   function startDrag(x) {
     isDragging = true;
-
     startX = x;
     currentX = x;
-
     stopAuto();
-
     track.style.transition = 'none';
   }
 
@@ -415,7 +401,6 @@ if (track && slides.length > 0 && dotsContainer) {
   });
 
   track.addEventListener('mouseup', endDrag);
-
   track.addEventListener('mouseleave', endDrag);
 
   /**
@@ -429,16 +414,12 @@ if (track && slides.length > 0 && dotsContainer) {
 
       dot.addEventListener('click', function () {
         index = i;
-
         updateSlide();
-
         stopAuto();
-
         startAuto();
       });
 
       dotsContainer.appendChild(dot);
-
       dots.push(dot);
     });
   }
@@ -461,9 +442,7 @@ if (track && slides.length > 0 && dotsContainer) {
    */
   document.addEventListener('DOMContentLoaded', function () {
     createDots();
-
     updateSlide();
-
     startAuto();
   });
 }
